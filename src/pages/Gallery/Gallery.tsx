@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from "react";
 import { getThumbnailsData } from "../../assets/js/api";
-// import { EventPopup } from "../../components/EventPopup/EventPopup";
+import { EventPopup } from "../../components/EventPopup/EventPopup";
 import { Loader } from "../../components/Loader/Loader";
 // import { Modal } from "../../components/Modal/Modal";
 import { ThumbnailList } from "../../components/ThumbnailList/ThumbnailList";
@@ -23,9 +23,9 @@ class Gallery extends Component<unknown, GalleryState> {
       error: "",
     };
   }
-  // clearErrors = (): void => {
-  //   this.setState({ error: "" });
-  // };
+  clearErrors = (): void => {
+    this.setState({ error: "" });
+  };
 
   loadData = async (): Promise<void> => {
     try {
@@ -58,6 +58,7 @@ class Gallery extends Component<unknown, GalleryState> {
 
     return (
       <>
+      {error && <EventPopup content={error} clear={this.clearErrors} popupType="error" />}
       {!isLoading ? (
           <ThumbnailList data={data} clickHandler={this.onThumbnailClick} />
         ) : (
