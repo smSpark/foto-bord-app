@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from "react";
 import { getThumbnailsData } from "../../assets/js/api";
 import { EventPopup } from "../../components/EventPopup/EventPopup";
 import { Loader } from "../../components/Loader/Loader";
-// import { Modal } from "../../components/Modal/Modal";
+import { Modal } from "../../components/Modal/Modal";
 import { ThumbnailList } from "../../components/ThumbnailList/ThumbnailList";
 import { IThumbnails } from "../../types/data";
 
@@ -47,11 +47,11 @@ class Gallery extends Component<unknown, GalleryState> {
     this.setState({ openedImageID: id });
   };
 
-  // onCloseButtonClick = (): void => {
-  //   this.setState({
-  //     openedImageID: null,
-  //   });
-  // };
+  onCloseButtonClick = (): void => {
+    this.setState({
+      openedImageID: null,
+    });
+  };
 
   render(): ReactNode {
     const { openedImageID, data, isLoading, error } = this.state;
@@ -64,7 +64,7 @@ class Gallery extends Component<unknown, GalleryState> {
         ) : (
           <Loader />
         )}
-      <div>ff</div>
+       {openedImageID && <Modal id={openedImageID} closeModalHandler={this.onCloseButtonClick} />}
         </>
     );
   }
